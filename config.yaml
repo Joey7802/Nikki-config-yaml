@@ -7,7 +7,7 @@ proxy-providers:
       url: https://www.gstatic.com/generate_204
       interval: 300
     proxy: 🟢 直连
-    url: "https://hongxingdl.love/hxyunvip?token=b2bf9e0e94284b19d351085899270c66"
+    url: "订阅链接"
   
 
 unified-delay: true
