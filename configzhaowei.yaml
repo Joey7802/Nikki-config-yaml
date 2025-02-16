@@ -7,7 +7,7 @@ proxy-providers:
       url: https://www.gstatic.com/generate_204
       interval: 300
     proxy: 🟢 直连
-    url: "http://106.55.228.246:36666/hxvip?token=61422a1176549564d8768ac205d85820"
+    url: "订阅链接"
     override:
       additional-prefix: "[红杏云]"
 
