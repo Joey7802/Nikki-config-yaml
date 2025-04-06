@@ -44,6 +44,9 @@ sniffer:
   skip-domain:
     - "Mijia Cloud"
     - "+.push.apple.com"
+    - "+.baidu.com"
+    - "+.mi.com"
+    - "+.alibaba.com"
 
 tun:
   enable: true
@@ -60,11 +63,15 @@ dns:
   ipv6: false
   enhanced-mode: fake-ip
   fake-ip-filter:
-    - "*"
     - "+.lan"
     - "+.local"
     - geosite:cn
     - geosite:private
+    - "connectivitycheck.gstatic.com"
+    - "+.google.cn"
+    - "+.googleapis.cn"
+    - "+.gvt1.com"
+    - "+.gtimg.com"
     
   default-nameserver:
     - tls://223.5.5.5
@@ -136,7 +143,7 @@ rules:
   - RULE-SET,geolocation-!cn,🚀 节点选择
   - RULE-SET,cn_domain,🎯 全球直连
   - RULE-SET,google_ip,🍀 Google,no-resolve
-  - RULE-SET,netflix_ip,🎥 NETFLIX,no-resolve,no-resolve
+  - RULE-SET,netflix_ip,🎥 NETFLIX,no-resolve
   - RULE-SET,telegram_ip,📲 Telegram,no-resolve
   - RULE-SET,cn_ip,🎯 全球直连
   - MATCH,🐟 漏网之鱼
