@@ -7,7 +7,7 @@ proxy-providers:
       url: https://www.gstatic.com/generate_204
       interval: 300
     proxy: 🟢 直连
-    url: "http://106.55.228.246:36666/hxvip?token=c3df3c5d3e8dcd8a540cd81614b56245"
+    url: "http://106.55.228.246:36666/hxvip?token="
 
  一元:
     type: http
@@ -17,7 +17,7 @@ proxy-providers:
       url: https://www.gstatic.com/generate_204
       interval: 300
     proxy: 🟢 直连
-    url: "https://sub3.smallstrawberry.com/api/v1/client/subscribe?token=38b35f4e498ea68ea3b0e035143c9393"
+    url: "https://sub3.smallstrawberry.com/api/v1/client/subscribe?token="
 
 proxies:
 - name: "🟢 直连"
@@ -267,4 +267,5 @@ rule-providers:
   cn_ip: { <<: *ip, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs" }
   google_ip: { <<: *ip, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.mrs" }
   telegram_ip: { <<: *ip, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.mrs" }
+
   netflix_ip: { <<: *ip, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.mrs" }
