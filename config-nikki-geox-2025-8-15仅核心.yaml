@@ -1,0 +1,292 @@
+proxy-providers:
+ 红杏云:
+    type: http
+    interval: 21600
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+    proxy: 🟢 直连
+    url: "https://hongxingyun10.vip/hxyunvip?token=70347e59f2a76e4b9dac5939e9c9a404"
+
+ 一元:
+    type: http
+    interval: 10800
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+    proxy: 🟢 直连
+    url: "https://sub3.smallstrawberry.com/api/v1/client/subscribe?token=38b35f4e498ea68ea3b0e035143c9393"
+
+proxies:
+- name: "🟢 直连"
+  type: direct
+  udp: true
+
+# 全局配置 
+mode: rule
+port: 8080
+socks-port: 1080
+redir-port: 7891
+mixed-port: 7890
+tproxy-port: 7892
+authentication:
+  - nikki:330104
+allow-lan: true
+bind-address: "*"
+ipv6: false
+unified-delay: true
+tcp-concurrent: true
+# interface-name: enp6s18
+log-level: error
+find-process-mode: 'off'
+global-client-fingerprint: chrome
+keep-alive-idle: 600
+keep-alive-interval: 15
+
+
+
+
+
+
+
+# 为防止使用插件朋友遇到面板问题，我注释掉了此模块。
+# 跑裸核朋友自行删除注释即可，使用nikki仅内核的ui路径改为/etc/nikki/run/ui
+external-controller: '[::]:9090'
+external-ui: ui
+external-ui-name: YACD
+secret: "910627"
+external-ui-url: "https://ghproxy.com/https://github.com/MetaCubeX/metacubexd/archive/gh-pages.zip"
+
+geodata-mode: true
+geox-url:
+  geoip: "https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip-lite.dat"
+  geosite: "https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat"
+  mmdb: "https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/country-lite.mmdb"
+  asn: "https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/GeoLite2-ASN.mmdb"
+
+geo-auto-update: true
+geo-update-interval: 48
+
+
+profile:
+  store-selected: true
+  store-fake-ip: true
+
+sniffer:
+  enable: true
+  sniff:
+    HTTP:
+      ports: [80, 8080-8880]
+      override-destination: true
+    TLS:
+      ports: [443, 8443]
+    QUIC:
+      ports: [443, 8443]
+  skip-domain:
+    - "Mijia Cloud"
+    - "+.push.apple.com"
+    - "+.baidu.com"
+    - "+.mi.com"
+    - "+.alibaba.com"
+    - "+.google-analytics.com"
+    - "*.doubleclick.net"
+    - "+.paypal.com"
+    - "*.alipay.com"
+    - "telegram.org"
+    - "t.me"
+  skip-ip-cidr:
+    - 91.108.56.0/24       # Telegram
+    - 149.154.160.0/20     # Telegram
+    - 148.135.0.0/16       # Meta/Facebook
+    - 157.240.0.0/16       # Facebook/Instagram
+  force-domain:
+    - "+.youtube.com"
+    - "+.googlevideo.com"
+    - "+.facebook.com"
+    - "+.twitter.com"
+
+tun:
+  enable: true
+  stack: mixed
+  dns-hijack:
+    - "any:53"
+    - "tcp://any:53"
+  auto-route: true
+  auto-redirect: true
+  auto-detect-interface: true
+
+dns:
+  enable: true
+  ipv6: false
+  enhanced-mode: fake-ip
+  listen: '[::]:1053'
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter-mode: blacklist
+  respect-rules: true
+  fake-ip-filter:
+    - "+.lan"
+    - "+.local"
+    - "+.home.arpa"
+    - "+.localdomain"
+    - "+.invalid"
+    - geosite:cn
+    - geosite:private
+    - "+.market.xiaomi.com"
+    - "connectivitycheck.gstatic.com"
+    - "+.google.cn"
+    - "+.googleapis.cn"
+    - "+.gvt1.com"
+    - "+.gtimg.com"
+    - "+.msftconnecttest.com"
+    - "+.msftncsi.com"
+    - "+.captive.apple.com"
+    - "+.ntp.org"
+    - "+.pool.ntp.org"
+    - "+.cn.ntp.org.cn"
+    - "+.openwrt.pool.ntp.org"
+    - "+.time.apple.com"
+    - "+.time.windows.com"
+    - "+.time.google.com"
+    - "+.localdomain.com"
+    - "+.airplay.com"
+    - "+.apple.com"
+    - "+.icloud.com"
+    - "+.itunes.apple.com"
+    - "+.mzstatic.com"
+    - "+.me.com"
+    - "+.appstore.com"
+    - "+.baidu.com"
+    - "+.bdstatic.com"
+    - "+.push.apple.com"
+    - "+.api.apple-cloudkit.com"
+    - "+.apple-mapkit.com"
+    - "+.edgesuite.net"
+    - "+.akadns.net"
+    - "17.0.0.0/8"  # ← 必加：Apple 的所有服务 IP
+            
+  default-nameserver:
+    - 202.99.104.68
+    - 223.5.5.5
+    - 223.6.6.6
+    
+  proxy-server-nameserver:
+    - https://dns.alidns.com/dns-query
+    - https://223.5.5.5/dns-query
+    - https://223.6.6.6/dns-query
+ 
+  nameserver:
+    - https://dns.alidns.com/dns-query
+    - https://223.5.5.5/dns-query
+    - https://223.6.6.6/dns-query
+  
+  nameserver-policy:
+    services.googleapis.cn,googleapis.cn,xn--ngstr-lra8j.com:
+      - https://dns.google/dns-query
+      - https://dns.cloudflare.com/dns-query
+      
+    geosite:private,cn:
+      - https://dns.alidns.com/dns-query
+      - https://223.5.5.5/dns-query
+      - https://223.6.6.6/dns-query
+    
+    geosite:geolocation-!cn:
+      - https://1.1.1.1/dns-query
+      - https://8.8.8.8/dns-query
+    
+   
+
+
+pr: &pr {type: select, proxies: [🚀 节点选择, 🔯 香港故转, 🔯 日本故转, 🔯 台湾故转, 🔯 狮城故转, 🔯 低倍率故转, ♻️ 香港自动, ♻️ 台湾自动, ♻️ 日本自动, ♻️ 狮城自动, ♻️ 美国自动, ♻️ 俄国自动,♻️ 一元自动, 🔁 一元均衡,♻️ 自动选择, ♻️ 低倍率自动, 🔁 低倍率均衡, 🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 狮城节点,🇺🇲 美国节点, 🇰🇷 韩国节点, 🇲🇴 澳门节点, 🇷🇺 俄国节点, 🕊️ 冷门节点, 📶 低倍率节点, 🌐 全部节点, 🟢 直连]}
+
+proxy-groups:
+- {name: 🚀 节点选择, type: select, proxies: [♻️ 自动选择, 🔯 香港故转, 🔯 日本故转, 🔯 狮城故转, 🔯 台湾故转, 🔯 低倍率故转, ♻️ 香港自动, ♻️ 台湾自动, ♻️ 日本自动, ♻️ 狮城自动, ♻️ 美国自动, ♻️ 俄国自动, ♻️ 一元自动, 🔁 一元均衡,♻️ 低倍率自动, 🔁 低倍率均衡, 🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇸🇬 狮城节点, 🇺🇲 美国节点, 🇰🇷 韩国节点,  🇲🇴 澳门节点, 🇷🇺 俄国节点, 🕊️ 冷门节点, 📶 低倍率节点, 🌐 全部节点, 🟢 直连]}
+- {name: 📹 YouTube, <<: *pr}
+- {name: 🍀 Google, <<: *pr}
+- {name: 🤖 ChatGPT, <<: *pr}
+- {name: 👨🏿‍💻 GitHub, <<: *pr}
+- {name: 🐬 OneDrive, <<: *pr}
+- {name: 🪟 Microsoft, <<: *pr}
+- {name: 🎵 TikTok, <<: *pr}
+- {name: 📲 Telegram, <<: *pr}
+- {name: 🕊️ Twitter, <<: *pr}
+- {name: 🎥 NETFLIX, <<: *pr}
+- {name: ✈️ Speedtest, <<: *pr}
+- {name: 💶 PayPal, <<: *pr}
+- {name: 🦅 usa, type: select, proxies: [♻️ 美国自动, 🇺🇲 美国节点]}
+- {name: 🍎 Apple, <<: *pr}
+- {name: 🎯 全球直连, type: select, proxies: [🟢 直连, 🚀 节点选择]}
+- {name: 🐟 漏网之鱼, <<: *pr}
+- {name: 🇭🇰 香港节点, type: select, include-all: true, filter: "(?=.*(港|HK|(?i)Hong|流量|套餐|官网|刷新|异常|重置))^((?!(台|日|韩|深|莫|美|澳|专线|看这里|直连)).)*$"}
+- {name: 🇯🇵 日本节点, type: select, include-all: true, filter: "(?=.*(日|JP|(?i)Japan))^((?!(港|台|韩|新|莫|美|澳|尼|直连|倍)).)*$"}
+- {name: 🇹🇼 台湾节点, type: select, include-all: true, filter: "(?=.*(台|TW|(?i)Taiwan))^((?!(港|日|韩|新|莫|美|澳|直连)).)*$"}
+- {name: 🇸🇬 狮城节点, type: select, include-all: true, filter: "(?=.*(新|SG|(?i)Singapore))^((?!(港|台|韩|日|莫|美|澳|流量|套餐|官网|刷新|异常|重置|直连)).)*$"}
+- {name: 🇺🇲 美国节点, type: select, include-all: true, filter: "(?=.*(美|US|(?i)States|America))^((?!(港|台|日|韩|莫|新|澳|专线|直连)).)*$"}
+- {name: 🇰🇷 韩国节点, type: select, include-all: true, filter: "(?i)(韩|kr|korea)(?!(直连))"}
+- {name: 🇷🇺 俄国节点, type: select, include-all: true, filter: "(?i)(俄|莫|ru|russia)(?!(直连))"}
+- {name: 🇲🇴 澳门节点, type: select, include-all: true, filter: "(?i)(MO|Macao|澳门|澳門)(?!(直连))"}
+- {name: 🕊️ 冷门节点, type: select, include-all: true, filter: "(?i)^(?!.*(香港|hk|hongkong|hong kong|台湾|twn|taiwan|台北|高雄|日本|jp|japan|新加坡|sg|singapore|韩国|kr|korea|MO|Macao|澳门|澳門|美国|us|united states|俄|莫|ru|russia|流量|套餐|官网|刷新|异常|重置|直连|一元)).*$"}
+- {name: 🔯 香港故转, type: fallback, include-all: true, tolerance: 100, interval: 300, filter: "(?=.*(港|HK|(?i)Hong|流量|套餐|官网|刷新|异常|重置))^((?!(台|日|韩|深|莫|美|澳|专线|看这里|直连)).)*$"}
+- {name: 🔯 日本故转, type: fallback, include-all: true, tolerance: 100, interval: 300, filter: "(?=.*(日|JP|(?i)Japan))^((?!(港|台|韩|新|莫|美|澳|尼|直连|倍)).)*$"}
+- {name: 🔯 台湾故转, type: fallback, include-all: true, tolerance: 100, interval: 300, filter: "(?=.*(台|TW|(?i)Taiwan))^((?!(港|日|韩|新|莫|美|澳|直连)).)*$"}
+- {name: 🔯 狮城故转, type: fallback, include-all: true, tolerance: 100, interval: 300, filter: "(?=.*(新|SG|(?i)Singapore))^((?!(港|台|韩|日|莫|美|澳|流量|套餐|官网|刷新|异常|重置|直连)).)*$"}
+- {name: ♻️ 香港自动, type: url-test, include-all: true, tolerance: 100, interval: 300, filter: "(?=.*(港|HK|(?i)Hong|流量|套餐|官网|刷新|异常|重置))^((?!(台|日|韩|深|莫|美|澳|专线|看这里|直连)).)*$"}
+- {name: ♻️ 日本自动, type: url-test, include-all: true, tolerance: 100, interval: 300, filter: "(?=.*(日|JP|(?i)Japan))^((?!(港|台|韩|新|莫|美|澳|尼|直连|倍)).)*$"}
+- {name: ♻️ 台湾自动, type: url-test, include-all: true, tolerance: 100, interval: 300, filter: "(?=.*(台|TW|(?i)Taiwan))^((?!(港|日|韩|新|莫|美|澳|直连)).)*$"}
+- {name: ♻️ 狮城自动, type: url-test, include-all: true, tolerance: 100, interval: 300, filter: "(?=.*(新|SG|(?i)Singapore))^((?!(港|台|韩|日|莫|美|澳|流量|套餐|官网|刷新|异常|重置|直连)).)*$"}
+- {name: ♻️ 美国自动, type: url-test, include-all: true, tolerance: 100, interval: 300, filter: "(?=.*(美|US|(?i)States|America))^((?!(港|台|日|韩|莫|新|澳|专线|直连)).)*$"}
+- {name: ♻️ 俄国自动, type: url-test, include-all: true, tolerance: 100, interval: 300, filter: "(?=.*(俄|莫|RU|MOS|(?i)Russia))^((?!(港|台|日|韩|新|美|澳|直连)).)*$"}
+- {name: ♻️ 一元自动, type: url-test, include-all: true, tolerance: 30, interval: 180, filter: "(?i)(专线|看这里)(?!(直连|倍))"}
+- {name: 🔁 一元均衡, type: load-balance, strategy: round-robin, include-all: true, tolerance: 30, interval: 180, filter: "(?i)(专线|看这里)(?!(直连|倍))"}
+# 新增低倍率相关
+- {name: 📶 低倍率节点, type: select, include-all: true, filter: "(?i)倍率"}
+- {name: ♻️ 低倍率自动, type: url-test, include-all: true, tolerance: 100, interval: 300, filter: "(?i)0.5倍率"}
+- {name: 🔯 低倍率故转, type: fallback, include-all: true, tolerance: 100, interval: 300, filter: "(?i)0.5倍率"}
+- {name: 🔁 低倍率均衡, type: load-balance, strategy: round-robin, include-all: true, tolerance: 100, interval: 300, filter: "(?i)0.5倍率"}
+- {name: ♻️ 自动选择, type: url-test, include-all: true, tolerance: 100, interval: 300, filter: "^((?!(🟢 直连|25倍)).)*$"}
+- {name: 🌐 全部节点, type: select, include-all: true}
+
+
+
+
+rules:
+  # 除中国外的 QUIC Domain
+  # 除中国外的 QUIC IP
+  - AND,((AND,((NETWORK,UDP),(DST-PORT,443))),(NOT,((OR,((GEOSITE,CN),(GEOIP,CN)))))),REJECT
+  - GEOIP,lan,🟢 直连
+  - RULE-SET,direct,🟢 直连
+  - GEOSITE,apple,🍎 Apple
+  - RULE-SET,proxylite,🚀 节点选择
+  - RULE-SET,usa_domain,🦅 usa
+  - GEOSITE,openai,🤖 ChatGPT
+  - GEOSITE,github,👨🏿‍💻 GitHub
+  - GEOSITE,youtube,📹 YouTube
+  - GEOSITE,google,🍀 Google
+  - GEOSITE,onedrive,🐬 OneDrive
+  - GEOSITE,microsoft,🪟 Microsoft
+  - GEOSITE,tiktok,🎵 TikTok
+  - GEOSITE,twitter,🕊️ Twitter
+  - GEOSITE,speedtest,✈️ Speedtest
+  - GEOSITE,telegram,📲 Telegram
+  - GEOSITE,netflix,🎥 NETFLIX
+  - GEOSITE,paypal,💶 PayPal
+  - GEOSITE,gfw,🚀 节点选择
+  - GEOSITE,geolocation-!cn,🚀 节点选择
+  - GEOSITE,cn,🎯 全球直连
+  - GEOIP,google,🍀 Google,no-resolve
+  - GEOIP,netflix,🎥 NETFLIX,no-resolve
+  - GEOIP,telegram,📲 Telegram,no-resolve
+  - GEOIP,twitter,🕊️ Twitter,no-resolve
+  - GEOIP,cn,🎯 全球直连
+  - MATCH,🐟 漏网之鱼
+rule-anchor:
+  ip: &ip {type: http, interval: 86400, behavior: ipcidr, format: mrs}
+  domain: &domain {type: http, interval: 86400, behavior: domain, format: mrs}
+  class: &class {type: http, interval: 86400, behavior: classical, format: text}
+rule-providers: 
+  
+  direct: { <<: *class, url: "https://raw.githubusercontent.com/Joey7802/Joey7802-openclash/refs/heads/main/Direct.list" }
+  proxylite: { <<: *class, url: "https://raw.githubusercontent.com/Joey7802/Joey7802-openclash/refs/heads/main/ProxyLite.list" }
+  usa_domain: { <<: *class, url: "https://raw.githubusercontent.com/Joey7802/Joey7802-openclash/refs/heads/main/USAlist.list" }
+  
